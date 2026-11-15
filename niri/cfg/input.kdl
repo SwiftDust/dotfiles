@@ -4,7 +4,7 @@
 input {
     keyboard {
         xkb {
-            options "caps:ctrl_modifier,ctrl:swapcaps"
+            options "caps:swapescape"
         }
         numlock // Enable numlock on startup
     }
