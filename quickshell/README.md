@@ -56,20 +56,16 @@ qs kill -c pond-shell
 qs -c pond-shell -d
 ```
 
-## One-time setup (already done)
+## One-time setup
+
+Run the repository installer, which creates these links and enables the path
+unit:
 
 ```bash
-mkdir -p ~/.config/quickshell
-ln -sfn ~/dotfiles/quickshell/pond-shell ~/.config/quickshell/pond-shell
-
-mkdir -p ~/.config/systemd/user
-ln -sfn ~/dotfiles/quickshell/systemd/pond-shell-sync.path \
-  ~/.config/systemd/user/pond-shell-sync.path
-ln -sfn ~/dotfiles/quickshell/systemd/pond-shell-sync.service \
-  ~/.config/systemd/user/pond-shell-sync.service
-systemctl --user daemon-reload
-systemctl --user enable --now pond-shell-sync.path
+~/dotfiles/install.sh
 ```
+
+See [`../README.md`](../README.md) for the full setup and rollback instructions.
 
 Your own files live directly in `pond-shell/` next to the symlinks, so Pond's
 QML singletons (`Theme`, `PanelStyle`, `NiriMsg`, ...) are available through

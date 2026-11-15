@@ -3,4 +3,4 @@ Description=Refresh Pond shell overlay symlinks
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/bash %h/dotfiles/quickshell/pond-shell/sync-upstream.sh
+ExecStart=/usr/bin/bash %h/.config/quickshell/pond-shell/sync-upstream.sh

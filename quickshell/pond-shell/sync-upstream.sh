@@ -3,8 +3,13 @@
 # Run this after a pond-shell package update, then restart the shell.
 set -euo pipefail
 
-here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 upstream="/usr/share/pond-interface/shell"
+
+if [[ ! -d "$upstream" ]]; then
+  echo "error: $upstream not found; is pond-shell installed?" >&2
+  exit 1
+fi
 
 # Only remove symlinks that point into the upstream shell, never user files.
 find "$here" -maxdepth 1 -type l -lname "$upstream/*" -delete
