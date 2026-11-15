@@ -1,0 +1,1 @@
+/usr/share/pond-interface/shell/PanelBackground.qml
