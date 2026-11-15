@@ -13,17 +13,62 @@
   `/usr/share/pond-interface/wallpaper` because Pond resolves
   `Quickshell.shellDir + "/../wallpaper/control.py"`.
 
-After a `pond-shell` update, refresh the links and restart the shell:
+## Automatic refresh on package updates
+
+A systemd user path unit watches the packaged shell and reruns the sync script
+whenever files are added, removed or rewritten:
+
+- `systemd/pond-shell-sync.path` watches `/usr/share/pond-interface/shell`
+- `systemd/pond-shell-sync.service` runs `pond-shell/sync-upstream.sh`
+
+It is enabled already. Check or re-enable it with:
 
 ```bash
-./pond-shell/sync-upstream.sh
+systemctl --user status pond-shell-sync.path
+systemctl --user enable --now pond-shell-sync.path
 ```
 
-One-time setup (already done):
+The unit only runs while you are logged in. If `pond-shell` was updated while
+you were logged out, run the script manually (or start the service) on the next
+login:
+
+```bash
+systemctl --user start pond-shell-sync.service
+```
+
+Alternatively, a pacman hook is included as `pond-shell/pond-shell-sync.hook`.
+Installing it makes pacman run the sync directly after every `pond-shell`
+transaction, even when no user session is active:
+
+```bash
+sudo install -Dm644 ~/dotfiles/quickshell/pond-shell/pond-shell-sync.hook \
+  /etc/pacman.d/hooks/pond-shell-sync.hook
+```
+
+The hook runs the script as `mart` with `runuser`, so files stay user-owned.
+
+## Restarting after an update
+
+Symlink changes need a shell restart before Quickshell picks them up:
+
+```bash
+qs kill -c pond-shell
+qs -c pond-shell -d
+```
+
+## One-time setup (already done)
 
 ```bash
 mkdir -p ~/.config/quickshell
 ln -sfn ~/dotfiles/quickshell/pond-shell ~/.config/quickshell/pond-shell
+
+mkdir -p ~/.config/systemd/user
+ln -sfn ~/dotfiles/quickshell/systemd/pond-shell-sync.path \
+  ~/.config/systemd/user/pond-shell-sync.path
+ln -sfn ~/dotfiles/quickshell/systemd/pond-shell-sync.service \
+  ~/.config/systemd/user/pond-shell-sync.service
+systemctl --user daemon-reload
+systemctl --user enable --now pond-shell-sync.path
 ```
 
 Your own files live directly in `pond-shell/` next to the symlinks, so Pond's

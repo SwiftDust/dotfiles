@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = pond-shell
+
+[Action]
+Description = Refreshing Pond shell overlay symlinks...
+When = PostTransaction
+Exec = /usr/bin/runuser -u mart -- /usr/bin/bash /home/mart/dotfiles/quickshell/pond-shell/sync-upstream.sh

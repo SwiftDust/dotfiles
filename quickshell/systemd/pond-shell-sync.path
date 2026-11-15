@@ -1,0 +1,10 @@
+[Unit]
+Description=Watch the packaged Pond shell for changes
+
+[Path]
+PathChanged=/usr/share/pond-interface/shell
+PathModified=/usr/share/pond-interface/shell
+Unit=pond-shell-sync.service
+
+[Install]
+WantedBy=default.target
