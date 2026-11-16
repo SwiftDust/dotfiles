@@ -30,3 +30,12 @@ gestures {
         off
     }
 }
+
+window-rule {
+    match app-id="zen"
+    draw-border-with-background false
+    background-effect {
+        blur true
+        xray false
+    }
+}
