@@ -8,6 +8,7 @@ kept in one repository and symlinked into `~/.config`.
 | Repository path | Linked to | Purpose |
 | --- | --- | --- |
 | `niri/` | `~/.config/niri` | Niri configuration, including Pond's shell integration and personal settings |
+| `vicinae/` | `~/.config/vicinae` | Vicinae launcher configuration |
 | `quickshell/pond-shell/` | `~/.config/quickshell/pond-shell` | Quickshell overlay around the packaged Pond shell |
 | `quickshell/systemd/` | `~/.config/systemd/user/` | Systemd user path unit that refreshes the overlay after `pond-shell` updates |
 
@@ -40,10 +41,11 @@ cd ~/dotfiles
 
 1. Creates `~/dotfiles/niri/shell` pointing at Pond's packaged Niri integration.
 2. Links `niri/` to `~/.config/niri`.
-3. Links `quickshell/pond-shell/` to `~/.config/quickshell/pond-shell`.
-4. Refreshes the symlinks inside the overlay that point into the packaged Pond
+3. Links `vicinae/` to `~/.config/vicinae`.
+4. Links `quickshell/pond-shell/` to `~/.config/quickshell/pond-shell`.
+5. Refreshes the symlinks inside the overlay that point into the packaged Pond
    shell (`UpstreamShell.qml`, `Theme.qml`, `settings/`, etc.).
-5. Links and enables `pond-shell-sync.path`, which watches the packaged shell
+6. Links and enables `pond-shell-sync.path`, which watches the packaged shell
    and reruns the refresh after `pond-shell` updates.
 
 If any destination already exists as a real file or directory, it is moved to

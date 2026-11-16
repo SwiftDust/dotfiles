@@ -60,7 +60,7 @@ link_path() {
   info "linked: $dest -> $src"
 }
 
-printf 'Linking Niri and Quickshell configuration...\n'
+printf 'Linking configuration files...\n'
 
 # niri/config.kdl includes ./shell/config.kdl. That directory is owned by the
 # Pond package and is intentionally not tracked in this repository.
@@ -74,6 +74,7 @@ fi
 
 links=(
   "$repo_dir/niri|$config_home/niri"
+  "$repo_dir/vicinae|$config_home/vicinae"
   "$repo_dir/quickshell/pond-shell|$config_home/quickshell/pond-shell"
   "$repo_dir/quickshell/systemd/pond-shell-sync.path|$config_home/systemd/user/pond-shell-sync.path"
   "$repo_dir/quickshell/systemd/pond-shell-sync.service|$config_home/systemd/user/pond-shell-sync.service"
