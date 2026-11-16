@@ -30,3 +30,8 @@ wallpaper_link="$here/../wallpaper"
 if [[ -L "$wallpaper_link" || ! -e "$wallpaper_link" ]]; then
   ln -sfn /usr/share/pond-interface/wallpaper "$wallpaper_link"
 fi
+
+if [[ -e "$here/$name" && ! -L "$here/$name" ]]; then
+  echo "keeping local override: $name" >&2
+  continue
+fi
